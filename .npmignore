@@ -1,0 +1,11 @@
+.DS_Store
+
+.circleci
+.editorconfig
+.eslintrc
+.github/
+.prettierignore
+.publishrc
+
+renoveate.json
+source/**/*test.js

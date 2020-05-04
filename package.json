@@ -1,0 +1,64 @@
+{
+  "author": "Ephigenia M. Eichner",
+  "name": "track-parcel",
+  "version": "0.0.0-dev",
+  "license": "MIT",
+  "preferGlobal": true,
+  "description": "",
+  "funding": "http://github.com/sponsors/Ephigenia",
+  "keywords": [
+    "delivery",
+    "dhl",
+    "dpd",
+    "package",
+    "package",
+    "packet",
+    "parcel",
+    "shipment",
+    "shipping",
+    "tracker",
+    "tracking",
+    "ups"
+  ],
+  "maintainer": {
+    "name": "Marcel Eichner",
+    "email": "marcel.eichner@ephigenia.de"
+  },
+  "contributors": [
+    {
+      "name": "Marcel Eichner",
+      "email": "marcel.eichner@ephigenia.de"
+    }
+  ],
+  "engines": {
+    "node": ">=10.20.1",
+    "npm": ">=6.9.0"
+  },
+  "mocha": {
+    "spec": "source/**/*.test.js"
+  },
+  "main": "source/cli.js",
+  "scripts": {
+    "audit": "npm audit",
+    "audit:strict": "npm audit --production --audit-level=high",
+    "lint": "eslint source",
+    "lint:fix": "npm run lint -- --fix",
+    "tdd": "npm run -s test -- --watch",
+    "test": "mocha --check-leaks --exit",
+    "start": "node $npm_package_main",
+    "publish-please": "publish-please",
+    "prepublishOnly": "publish-please guard"
+  },
+  "dependencies": {
+    "ansi-colors": "^4.1.1",
+    "commander": "^5.1.0",
+    "debug": "^4.1.1",
+    "node-fetch": "^2.6.0",
+    "publish-please": "5.5.1"
+  },
+  "devDependencies": {
+    "chai": "4.2.0",
+    "eslint": "7.1.0",
+    "mocha": "7.2.0"
+  }
+}
