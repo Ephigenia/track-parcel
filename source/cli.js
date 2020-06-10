@@ -34,7 +34,11 @@ const program = commander.program
         process.exit(0);
       })
       .catch(err => {
+        if (String(process.env.NODE_ENV).toLowerCase() === 'development') {
+          console.error(err);
+        } else {
         console.error(err.message || err);
+        }
         process.exit(1);
       });
   });
