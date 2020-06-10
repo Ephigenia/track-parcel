@@ -37,7 +37,7 @@ const program = commander.program
         if (String(process.env.NODE_ENV).toLowerCase() === 'development') {
           console.error(err);
         } else {
-        console.error(err.message || err);
+          console.error(err.message || err);
         }
         process.exit(1);
       });

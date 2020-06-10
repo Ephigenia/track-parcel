@@ -25,7 +25,8 @@ function transformShipment(shipment) {
   }
   return {
     destination: to,
-    events: (shipmentProgressActivities || []).map(transformEvent),
+    events: (shipmentProgressActivities || []).map(transformEvent)
+      .filter(e => e.when || e.where || e.label || e.status),
     label: null,
     origin: null,
     service: 'ups',
@@ -35,10 +36,10 @@ function transformShipment(shipment) {
 }
 
 function transformEvent(event) {
-  // activityScan = DELIVERED, Out for Delivery, Arrival Scan, Departure Scan, Origin Scan, 
+  // activityScan = DELIVERED, Out for Delivery, Arrival Scan, Departure Scan, Origin Scan,
   const { activityScan, date, time, location } = event;
   return {
-    when: new Date([date, time].join(' ')),
+    when: (date && time) ? new Date([date, time].join(' ')) : null,
     where: location,
     label: activityScan,
     status: activityScan,
@@ -63,7 +64,7 @@ async function track(trackingNumber) {
     body,
   };
 
-  log(opts.method, url.toString(), opts);  
+  log(opts.method, url.toString(), opts);
 
   return fetch(url.toString(), opts)
     .then(response => {
@@ -79,7 +80,7 @@ async function track(trackingNumber) {
       return response.json();
     })
     .then(data => {
-      // in case of invalid codes ups returns a HTTP Status 200 and 
+      // in case of invalid codes ups returns a HTTP Status 200 and
       // the error as json in the response
       if (data.statusCode !== '200') {
         throw new Error(data.statusText);
