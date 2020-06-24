@@ -10,8 +10,12 @@ function transform(data) {
   return parcelLifeCycleData.map(transformShipment);
 }
 
+/**
+ * @param {object} shipment
+ * @returns {object} resulting parcel
+ */
 function transformShipment(shipment) {
-  const { shipmentInfo, scanInfo, statusInfo } = shipment;
+  const { shipmentInfo, scanInfo } = shipment;
   const trackingNumber = shipmentInfo.parcelLabelNumber;
   const to = shipmentInfo.receiverCountryIsoCode;
   return {
@@ -19,6 +23,7 @@ function transformShipment(shipment) {
     events: (scanInfo.scan || []).map(transformEvent),
     label: null,
     origin: null,
+    url: `https://tracking.dpd.de/status/de_DE/parcel/${trackingNumber}`,
     service: 'DPD',
     trackingNumber,
   };
@@ -57,7 +62,7 @@ async function track(trackingNumber) {
     method: 'GET',
   };
 
-  log(opts.method, url.toString(), opts);  
+  log(opts.method, url.toString(), opts);
 
   return fetch(url.toString(), opts)
     .then(response => {
