@@ -1,6 +1,7 @@
 'use strict';
 
 const chalk = require('ansi-colors');
+const terminalLink = require('terminal-link');
 
 const { isToday, dateFormat } = require('./helpers');
 
@@ -13,6 +14,7 @@ function showNormalizedParcel(parcel) {
     service,
     trackingNumber,
     weight = {},
+    url,
   } = parcel;
 
   const parts = {
@@ -22,7 +24,8 @@ function showNormalizedParcel(parcel) {
     from: chalk.bold(origin),
     to: chalk.bold(destination),
     service: chalk.bold(service),
-  }
+    url: terminalLink(url),
+  };
   Object.entries(parts).forEach(([label, value]) => {
     if (value.length !== 0) {
       const paddedLabel = label.padStart(19, ' ');
