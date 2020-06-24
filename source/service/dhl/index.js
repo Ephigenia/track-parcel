@@ -24,7 +24,7 @@ function transformShipment(shipment) {
     origin: from,
     service: service,
     trackingNumber: id,
-    url: `https://webtrack.dhlglobalmail.com/?trackingnumber=${trackingNumber}`,
+    url: `https://webtrack.dhlglobalmail.com/?trackingnumber=${id}`,
   };
 }
 
