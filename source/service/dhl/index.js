@@ -24,6 +24,7 @@ function transformShipment(shipment) {
     origin: from,
     service: service,
     trackingNumber: id,
+    url: `https://webtrack.dhlglobalmail.com/?trackingnumber=${trackingNumber}`,
   };
 }
 
@@ -43,7 +44,7 @@ async function track(trackingNumber, language = 'en', requesterCountryCode = 'US
   url.searchParams.append('trackingNumber', trackingNumber);
   url.searchParams.append('language', language);
   url.searchParams.append('requesterCountryCode', requesterCountryCode);
-  
+
   const opts = {
     headers: {
       'Host': url.host,
@@ -57,7 +58,7 @@ async function track(trackingNumber, language = 'en', requesterCountryCode = 'US
     method: 'GET',
   };
 
-  log(opts.method, url.toString(), opts);  
+  log(opts.method, url.toString(), opts);
 
   return fetch(url.toString(), opts)
     .then(response => {
