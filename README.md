@@ -1,4 +1,8 @@
+Supported Carries:
 
+- DHL
+- DPD
+- UPS
 
 ## Other projects
 
