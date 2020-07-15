@@ -11,9 +11,11 @@ function transform(data) {
 }
 
 function transformShipment(shipment) {
-  const { events, details, origin, destination, status, id, service } = shipment;
+  const { events, details, origin = {}, destination = {}, id, service } = shipment;
 
   // TODO const weight = details.weight.value}${details.weight.unitText;
+  origin.address = origin.address || {};
+  destination.address = destination.address || {};
   const from = origin.address.countryCode || origin.address.addressLocality;
   const to = destination.address.countryCode || destination.address.addressLocality;
   const label = (details.product || {}).productName;
