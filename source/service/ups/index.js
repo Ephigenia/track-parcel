@@ -46,6 +46,10 @@ function transformEvent(event) {
   };
 }
 
+function normalizeTrackingNumber(trackingNumber) {
+  return String(trackingNumber || '').toUpperCase().replace(/[^\dA-Z]/g, '');
+}
+
 async function track(trackingNumber) {
   const url = new URL('https://wwwapps.ups.com/track/api/Track/GetStatus');
   url.searchParams.append('loc', 'en_KR');
@@ -53,7 +57,7 @@ async function track(trackingNumber) {
   const body = JSON.stringify({
     Locale: 'en_KR',
     Requester: 'UPSHome',
-    TrackingNumber: [trackingNumber],
+    TrackingNumber: [normalizeTrackingNumber(trackingNumber)],
   })
   const opts = {
     headers: {
@@ -92,4 +96,5 @@ async function track(trackingNumber) {
 exports = module.exports = {
   track,
   transform,
-}
+  normalizeTrackingNumber,
+};

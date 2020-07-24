@@ -49,8 +49,12 @@ function transformEvent(event) {
   };
 }
 
+function normalizeTrackingNumber(trackingNumber) {
+  return String(trackingNumber || '').replace(/[^\d]/g, '');
+}
+
 async function track(trackingNumber) {
-  const url = new URL(`https://tracking.dpd.de/rest/plc/en_US/${trackingNumber}`);
+  const url = new URL(`https://tracking.dpd.de/rest/plc/en_US/${normalizeTrackingNumber(trackingNumber)}`);
   const opts = {
     headers: {
       'Accept': 'application/json, text/plain, */*',
@@ -82,4 +86,5 @@ async function track(trackingNumber) {
 exports = module.exports = {
   track,
   transform,
-}
+  normalizeTrackingNumber,
+};

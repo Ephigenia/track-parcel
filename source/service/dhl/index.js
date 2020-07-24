@@ -41,9 +41,13 @@ function transformEvent(event) {
   };
 }
 
+function normalizeTrackingnumber(trackingNumber) {
+  return String(trackingNumber || '').replace(/[^\d]/g, '');
+}
+
 async function track(trackingNumber, language = 'en', requesterCountryCode = 'US') {
   const url = new URL('https://www.dhl.com/utapi');
-  url.searchParams.append('trackingNumber', trackingNumber);
+  url.searchParams.append('trackingNumber', normalizeTrackingnumber(trackingNumber));
   url.searchParams.append('language', language);
   url.searchParams.append('requesterCountryCode', requesterCountryCode);
 
@@ -80,4 +84,5 @@ async function track(trackingNumber, language = 'en', requesterCountryCode = 'US
 exports = module.exports = {
   track,
   transform,
-}
+  normalizeTrackingnumber,
+};
