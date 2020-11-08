@@ -54,7 +54,7 @@
     "commander": "^6.0.0",
     "debug": "^4.1.1",
     "node-fetch": "^2.6.0",
-    "publish-please": "5.5.1",
+    "publish-please": "5.5.2",
     "terminal-link": "^2.1.1"
   },
   "devDependencies": {
